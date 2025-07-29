@@ -1,11 +1,12 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { assets, dummyUserData, ownerMenuLinks } from "../../assets/assets";
+import { assets, ownerMenuLinks } from "../../assets/assets";
 import { useState } from "react";
+import { useAppContext } from "../../context/AppContext";
 
 
 const Sidebar = () => {
 
-  const user = dummyUserData;
+  const {user} = useAppContext();
   const location = useLocation();
   const [image, setImage] = useState("");
 
@@ -18,7 +19,7 @@ const Sidebar = () => {
     <div className='relative min-h-screen md:flex flex-col items-center pt-8 max-w-13 md:max-w-60 w-full border-r border-borderColor text-sm'>
      <div className="group relative">
       <label htmlFor="image">
-        <img src={image ? URL.createObjectURL(image) : user?.image || ""} className="h-9 md:h-14 w-9 md:w-14 rounded-full mx-auto" alt="" />
+        <img src={image ? URL.createObjectURL(image) : user?.image || "https://cdn.pixabay.com/photo/2018/04/18/18/56/user-3331257_640.png"} className="h-9 md:h-14 w-9 md:w-14 rounded-full mx-auto object-cover" alt="" />
         <input type="file" id="image" accept="image/*" hidden onChange={(e)=>setImage(e.target.files[0])}/>
         <div className="absolute hidden top-0 right-0 left-0 bottom-0 bg-black/10 rounded-full group-hover:flex items-center justify-center cursor-pointer">
          <img src={assets.edit_icon} alt="" />
